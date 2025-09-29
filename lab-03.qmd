@@ -1,7 +1,7 @@
 ---
 title: "Lab 03: Descriptive Statistics and Visualization "
-author: Maghfira Ramadhani
-date: "2025-09-24"
+author: Cristina Aybar
+date: "2025-09-29"
 date-format: "MMM DD, YYYY"
 execute:
   freeze: auto
@@ -399,6 +399,19 @@ There is website that host a collection of beautiful charts you might want to vi
 
 ```{r, echo=T, eval=T}
 #| label: r graph gallery replication 1
+# library
+library(ggridges)
+library(ggplot2)
+ 
+# Diamonds dataset is provided by R natively
+#head(diamonds)
+ 
+# basic example
+ggplot(diamonds, aes(x = price, y = cut, fill = cut)) +
+  geom_density_ridges() +
+  theme_ridges() + 
+  theme(legend.position = "none")
+
 
 ```
 
@@ -406,7 +419,18 @@ There is website that host a collection of beautiful charts you might want to vi
 
 ```{r, echo=T, eval=T}
 #| label: r graph gallery replication 2
+# Libraries
+library(ggplot2)
+library(dplyr)
 
+# Load dataset from github
+data <- read.table("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/1_OneNum.csv", header=TRUE)
+
+# Make the histogram
+data %>%
+  filter( price<300 ) %>%
+  ggplot( aes(x=price)) +
+    geom_density(fill="#69b3a2", color="#e9ecef", alpha=0.8)
 ```
 
 # Wrapping up
@@ -442,7 +466,7 @@ To submit your assignment:
 # Grading
 
 | Component                                                          | Points |
-|:------------------------------------------------------|:----------------|
+|:-----------------------------------------------------|:-----------------|
 | Exercise 1                                                         | 5      |
 | Exercise 2                                                         | 5      |
 | Exercise 3                                                         | 80     |
